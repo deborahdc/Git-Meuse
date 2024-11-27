@@ -1,12 +1,13 @@
 #%% Developed by Deborah, 1st of October 2024
 # Reads the CSV sent by RWS email based on the request from https://waterinfo.rws.nl/#/nav/thema
-# Drops the outliers based on a threshold as NaN, THRESHOLD NEEDS TO BE UPDATED
+# Drops the outliers/strange values based on a threshold and replaces as NaN (), THRESHOLD NEEDS TO BE UPDATED after inspection
 
 import pandas as pd
+import matplotlib.pyplot as plt
 import os
 
 # Input and output directories
-file_path = r'D:\My Documents\LoFlowMaas\Discharge\NL\20241001_040\20241001_040.csv'
+file_path = r'D:\My Documents\LoFlowMaas\Discharge\NL\20241011_035\20241011_035.csv' # One by one in this code
 
 output_dir = r'D:\My Documents\LoFlowMaas\Discharge\NL\station_outputs'
 input_dir = output_dir  # Keep output files for next steps
@@ -44,7 +45,7 @@ for meetpunt in meetpunt_identificaties:
 
 #%% Section 1.2 Inspecting Plot
 
-file_path = r'D:\My Documents\LoFlowMaas\Discharge\NL\station_outputs\Eijsden grens_hourly_discharge_raw.txt' #change to check other stations
+file_path = r'D:\My Documents\LoFlowMaas\Discharge\NL\station_outputs\Eijsden grens_hourly_discharge_raw.txt' # Change to check other stations
 data = pd.read_csv(file_path, sep=' ', header=0)  # Assuming space-separated file with 'Date' and 'Discharge' columns
 
 # Convert the 'Date' column back to datetime for plotting
@@ -67,7 +68,7 @@ plt.show()
 threshold = 1000000  # Update this threshold after inspecting the raw data
 
 # List all raw discharge files
-files = [f for f in os.listdir(output_dir) if f.endswith('_hourly_discharge_raw.txt')]
+files = [f for f in os.listdir(output_dir) if f.endswith('.txt')]
 
 for file in files:
     file_path = os.path.join(output_dir, file)
@@ -85,6 +86,7 @@ for file in files:
     print(f"Filtered data for station {file.split('_')[0]} saved to {output_file_filtered}")
 
 #%% Section 3: Calculate and save daily averages from filtered data (excluding NaN values)
+# Because raw data was hourly
 
 # Create a directory for the daily average output
 daily_avg_output_dir = os.path.join(output_dir, 'average')
@@ -109,10 +111,10 @@ for file in files:
 
     # Save daily average to a new file with the same format and rounded to 2 decimals
     daily_avg = daily_avg.round(2)
-    output_file_avg = os.path.join(daily_avg_output_dir, f"{file.split('_')[0]}_daily_average.txt")
+    output_file_avg = os.path.join(daily_avg_output_dir, f"{file.split('_')[0]}.txt")
     daily_avg.to_csv(output_file_avg, sep=' ', header=['Discharge'], date_format='%Y%m%d')
     
     print(f"Daily average discharge for station {file.split('_')[0]} saved to {output_file_avg}")
 
 
-#%% End of Script
+#%% 

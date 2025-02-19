@@ -111,11 +111,12 @@ def process_all_thresholds(directory_path, excel_file_path, output_directory, re
 
 # Define paths
 directory_path = r'D:\My Documents\LoFlowMaas\Discharge\interpolated\moving_average' # If using already the moving averages, no need to add again, only if it is not smoothed enough
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx'
+excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams3.xlsx'
 output_directory = r'D:\My Documents\LoFlowMaas\Discharge\threshold\statistical_threshold'
 
 # Ensure the output directory exists
 os.makedirs(output_directory, exist_ok=True)
+
 
 # Run the processing
 process_all_thresholds(directory_path, excel_file_path, output_directory)
@@ -273,7 +274,7 @@ def process_gauges(excel_file_path, meteorology_dir, output_dir, reference_perio
             print(f"Error processing basin {basin_id}: {e}")
 
 # Example usage
-excel_file_path = r"D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx"
+excel_file_path = r"D:\My Documents\LoFlowMaas\Discharge\Info_EStreams3.xlsx"
 meteorology_dir = r"D:\My Documents\LoFlowMaas\EStreams_data\EStreams\meteorology"
 output_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\p_factor"
 process_gauges(excel_file_path, meteorology_dir, output_dir, reference_period=(1980, 2020))
@@ -324,6 +325,7 @@ def process_thresholds_and_p_factors(thresholds_dir, p_factors_dir, output_dir):
             multiply_thresholds_by_pfactor(threshold_file_path, p_factor_file_path, output_dir, gauge_id)
         else:
             print(f"Missing p_factor file for {gauge_id}, skipping.")
+            
 
 thresholds_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\statistical_threshold"
 p_factors_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\p_factor"

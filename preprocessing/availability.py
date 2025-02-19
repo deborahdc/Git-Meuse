@@ -8,7 +8,7 @@ import numpy as np
 
 # This codes generate the availability for all stations, but monthly inspection for each station
 # To generate all together, copy the data data was saved separetely for each station folder in a folder with all stations
-input_dir = r'D:\My Documents\LoFlowMaas\Discharge\All'
+input_dir = r'D:\My Documents\LoFlowMaas\Discharge\interpolated'
 
 # List all average discharge files
 files = [f for f in os.listdir(input_dir) if f.endswith('.txt')]
@@ -172,7 +172,7 @@ import numpy as np
 input_dir = r'D:\My Documents\LoFlowMaas\Discharge\interpolated'
 
 # Path to the Excel file
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx' # Replace if updated
+excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams3.xlsx' # Replace if updated
 
 # Load the gauge IDs from the spreadsheet
 gauge_info = pd.read_excel(excel_file_path, dtype=str)
@@ -282,10 +282,22 @@ if not all_data.empty:
 
     # Create a color map using seaborn with thin lines and larger annotation font size
     sns.heatmap(
-        availability_pivot, cmap="RdYlGn", cbar_kws={'label': '% Data Availability'}, 
-        vmin=0, vmax=100, annot=True, fmt=".0f", linewidths=0.5, linecolor='gray',
-        annot_kws={"size": 8}  # Font size for percentage annotations
+        availability_pivot, 
+        cmap="RdYlGn", 
+        cbar_kws={'label': '% Data Availability', 'shrink': 0.5},  # Adjust color bar size
+        vmin=0, vmax=100, 
+        annot=True, 
+        fmt=".0f", 
+        linewidths=0.5, 
+        linecolor='gray',
+        annot_kws={"size": 6}  # Reduce annotation font size inside squares
     )
+
+    # Increase the font size of the color bar labels
+    cbar = plt.gca().collections[0].colorbar  # Get the color bar
+    cbar.ax.tick_params(labelsize=20)  # Set color bar font size
+    cbar.set_label('% Data Availability', fontsize=20)  # Increase label font size
+
 
     # Set plot labels and title
     plt.title('Yearly Data Availability by Station', fontsize=20)

@@ -351,3 +351,126 @@ end_date = '2010-12-31'
 process_all_basins(directory_path, excel_file_path, output_folder, start_date, end_date, beta=2, npass=2)
 
 #%%
+
+#WITH SEASONAL
+
+import pandas as pd
+import numpy as np
+import os
+from scipy.optimize import minimize
+
+def apply_LH_filter(Qtotal, alpha, beta=2, npass=2, initopt=0):
+    Qquick = np.zeros_like(Qtotal, dtype=float)
+    Qbase = Qtotal.copy()
+
+    if initopt == 0:
+        Qquick[0] = Qtotal[0]
+
+    # First forward pass
+    for ii in range(1, len(Qtotal)):
+        Qquick[ii] = alpha * Qquick[ii - 1] + ((1 + alpha) / beta) * (Qtotal[ii] - Qtotal[ii - 1])
+
+    Qbase = np.where(Qquick > 0, Qtotal - Qquick, Qbase)
+
+    # Sequence of backward and forward passes
+    for _ in range(npass):
+        Qquick[-1] = Qtotal[-1] if initopt != 0 else Qbase[-1]
+
+        # Backward pass
+        for ii in range(len(Qtotal) - 1, 0, -1):
+            Qquick[ii - 1] = alpha * Qquick[ii] + ((1 + alpha) / beta) * (Qbase[ii - 1] - Qbase[ii])
+        Qbase = np.where(Qquick > 0, Qbase - Qquick, Qbase)
+
+        # Forward pass
+        Qquick[0] = Qtotal[0] if initopt != 0 else Qbase[0]
+
+        for ii in range(1, len(Qtotal)):
+            Qquick[ii] = alpha * Qquick[ii - 1] + ((1 + alpha) / beta) * (Qbase[ii] - Qbase[ii - 1])
+        Qbase = np.where(Qquick > 0, Qbase - Qquick, Qbase)
+
+    return Qbase, Qtotal - Qbase  # Quickflow = Total Discharge - Baseflow
+
+def calculate_BFI(Qtotal, Qbase):
+    return np.sum(Qbase) / np.sum(Qtotal)
+
+def optimize_alpha(target_BFI, Qtotal, beta=2, npass=2):
+    def objective(alpha):
+        alpha = alpha.item()
+        Qbase, _ = apply_LH_filter(Qtotal, alpha=alpha, beta=beta, npass=npass)
+        calculated_BFI = calculate_BFI(Qtotal, Qbase)
+        return (calculated_BFI - target_BFI) ** 2
+
+    initial_alpha = 0.92  # Initial guess for alpha
+    result = minimize(objective, initial_alpha, bounds=[(0, 1)], method='L-BFGS-B')
+    return result.x[0] if result.success else initial_alpha
+
+def calculate_seasonal_volumes(data, area, season_months):
+    data['Date'] = pd.to_datetime(data['Date'])
+    data['Volume_Baseflow'] = data['Baseflow'] * 86400  # Daily volume in m³
+
+    data['Year'] = data['Date'].dt.year
+    data['Month'] = data['Date'].dt.month
+
+    # Filter for specified season months
+    seasonal_data = data[data['Month'].isin(season_months)]
+
+    seasonal_volumes = seasonal_data.groupby('Year').agg({
+        'Volume_Baseflow': 'sum'
+    }).dropna()
+
+    avg_baseflow_volume_m3 = seasonal_volumes['Volume_Baseflow'].mean()
+
+    area_m2 = area * 1e6  # Convert km² to m²
+    avg_baseflow_volume_mm = (avg_baseflow_volume_m3 / area_m2) * 1000  # Convert m to mm
+
+    return avg_baseflow_volume_m3, avg_baseflow_volume_mm
+
+def process_all_seasons(directory_path, excel_file_path, output_folder, beta=2, npass=2):
+    info_df = pd.read_excel(excel_file_path, dtype={'gauge_id': str})
+    seasonal_output_folder = os.path.join(output_folder, "seasonal")
+    os.makedirs(seasonal_output_folder, exist_ok=True)
+
+    summary_file_path = os.path.join(seasonal_output_folder, "summary_all_seasons.txt")
+    with open(summary_file_path, "w") as summary_file:
+        summary_file.write("Gauge ID\tBasin ID\tGauge Name\tWinter Baseflow Volume (m³)\tWinter Baseflow Volume (mm)\tSpring Baseflow Volume (m³)\tSpring Baseflow Volume (mm)\tSummer Baseflow Volume (m³)\tSummer Baseflow Volume (mm)\tAutumn Baseflow Volume (m³)\tAutumn Baseflow Volume (mm)\n")
+
+        for _, row in info_df.iterrows():
+            gauge_id = row['gauge_id']
+            basin_id = row['basin_id']
+            gauge_name = row['gauge_name']
+            area = row['area']  # Area in km²
+
+            file_path = os.path.join(directory_path, f"{gauge_id}.txt")
+
+            if not os.path.exists(file_path):
+                print(f"File for gauge_id '{gauge_id}' not found. Skipping...")
+                continue
+
+            data = pd.read_csv(file_path, delimiter=' ', header=0, names=['Date', 'Discharge'])
+            data['Date'] = pd.to_datetime(data['Date'], format='%Y%m%d')
+            data = data[data['Discharge'] > 0].copy()
+
+            Qtotal_full = data['Discharge'].values
+            optimal_alpha = optimize_alpha(row['Target_BFI'], Qtotal_full, beta=beta, npass=npass)
+
+            Qbase_full, _ = apply_LH_filter(Qtotal_full, alpha=optimal_alpha, beta=beta, npass=npass, initopt=0)
+            data['Baseflow'] = Qbase_full
+
+            # Calculate seasonal volumes
+            winter_m3, winter_mm = calculate_seasonal_volumes(data, area, [12, 1, 2])
+            spring_m3, spring_mm = calculate_seasonal_volumes(data, area, [3, 4, 5])
+            summer_m3, summer_mm = calculate_seasonal_volumes(data, area, [6, 7, 8])
+            autumn_m3, autumn_mm = calculate_seasonal_volumes(data, area, [9, 10, 11])
+
+            summary_file.write(f"{gauge_id}\t{basin_id}\t{gauge_name}\t{winter_m3:.2f}\t{winter_mm:.2f}\t{spring_m3:.2f}\t{spring_mm:.2f}\t{summer_m3:.2f}\t{summer_mm:.2f}\t{autumn_m3:.2f}\t{autumn_mm:.2f}\n")
+
+    print(f"All seasons summary saved in {summary_file_path}")
+
+# Paths
+base_directory_path = r'D:\My Documents\LoFlowMaas\Discharge\interpolated'
+excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx'
+output_folder = r'D:\My Documents\LoFlowMaas\Discharge\recession'
+
+process_all_seasons(base_directory_path, excel_file_path, output_folder, beta=2, npass=2)
+
+#%%

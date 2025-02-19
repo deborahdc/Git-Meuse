@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 # Set the path for the folder containing CSV files and the output folder for txt files
-input_folder = r"D:\My Documents\LoFlowMaas\Discharge\FR\Donne"
+input_folder = r"D:\My Documents\LoFlowMaas\Discharge\FR\Donne\old"
 output_folder = os.path.join(input_folder, 'station_outputs')
 
 # Create output directory if it doesn't exist

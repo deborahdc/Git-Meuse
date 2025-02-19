@@ -230,11 +230,11 @@ def generate_low_flow_analysis_plot_with_paired(
 # Example (to zoom in and inspect)
 gauge_id = '2829100000100'
 directory_path = r'D:\My Documents\LoFlowMaas\Discharge\interpolated\moving_average'
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx'
+excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams3.xlsx'
 threshold_p_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\threshold_p"
 p_factor_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\p_factor"
-start_date = '2003-10-01'
-end_date = '2006-09-30'
+start_date = '2002-10-01'
+end_date = '2004-09-30'
 
 generate_low_flow_analysis_plot_with_paired(
     gauge_id=gauge_id,

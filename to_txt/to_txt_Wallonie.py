@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Set the path for the folder containing Excel files and the output folder for txt files
-input_folder = r"D:\My Documents\LoFlowMaas\Discharge\BE-W\Wallonie"
+input_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BE-W\Wallonie"
 output_folder = os.path.join(input_folder, 'station_outputs')
 
 # Create output directory if it doesn't exist

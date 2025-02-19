@@ -8,8 +8,8 @@ from pyproj import CRS
 from shapely.geometry import Point
 
 # File paths
-input_excel_path = r"D:\My Documents\LoFlowMaas\Waterschap Limburg Stations_Marco\Metadata.xlsx"
-output_shp_path = r"D:\My Documents\LoFlowMaas\GIS\Data\Saved\stations_WL.shp"
+input_excel_path = r"C:\Users\ddo001\Documents\LoFloMeuse\Waterschap Limburg Stations_Marco\Metadata.xlsx"
+output_shp_path = r"C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved\stations_WL.shp"
 
 # Load the metadata from the Excel file
 df = pd.read_excel(input_excel_path, usecols=['ID', 'Naam', 'X', 'Y'])
@@ -36,10 +36,10 @@ import geopandas as gpd
 import pandas as pd
 
 # Define file paths
-stations_path = r"D:\My Documents\LoFlowMaas\GIS\Data\Saved\stations_WL.shp"
-stroomgebied_geul_path = r"D:\My Documents\LoFlowMaas\Waterschap Limburg Stations_Marco\stroomgebiedenQ\Geul_stroomgebiedenQ.shp"
-stroomgebied_geleenbeek_path = r"D:\My Documents\LoFlowMaas\Waterschap Limburg Stations_Marco\stroomgebiedenQ\Geleenbeek_stroomgebiedenQ.shp"
-output_stations_path = r"D:\My Documents\LoFlowMaas\GIS\Data\Saved\stations_WL.shp"
+stations_path = r"C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved\stations_WL.shp"
+stroomgebied_geul_path = r"C:\Users\ddo001\Documents\LoFloMeuse\Waterschap Limburg Stations_Marco\stroomgebiedenQ\Geul_stroomgebiedenQ.shp"
+stroomgebied_geleenbeek_path = r"C:\Users\ddo001\Documents\LoFloMeuse\Waterschap Limburg Stations_Marco\stroomgebiedenQ\Geleenbeek_stroomgebiedenQ.shp"
+output_stations_path = r"C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved\stations_WL.shp"
 
 # Load the shapefiles
 stations = gpd.read_file(stations_path)
@@ -69,9 +69,9 @@ import numpy as np
 import os
 
 # Load the CSV and define output dir
-file_path = r'D:\My Documents\LoFlowMaas\Waterschap Limburg Stations_Marco\Export watersysteem WL.csv'
+file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Waterschap Limburg Stations_Marco\Export watersysteem WL.csv'
 data = pd.read_csv(file_path, delimiter=',', header=0)  # Use header=0 to read the first row as headers
-output_dir = r'D:\My Documents\LoFlowMaas\Discharge\WL'
+output_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\WL'
 os.makedirs(output_dir, exist_ok=True)
 
 
@@ -139,7 +139,7 @@ import matplotlib.pyplot as plt
 import os
 
 # Set the directory containing the text files
-input_dir = r'D:\My Documents\LoFlowMaas\Discharge\WL'
+input_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\WL'
 
 # List to store DataFrames
 dataframes = []

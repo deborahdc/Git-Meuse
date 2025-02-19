@@ -5,14 +5,14 @@ import numpy as np
 import os
 
 # File paths
-slope_raster_fp = r"D:\My Documents\LoFlowMaas\GIS\Data\Saved\NBS\Grouped_layers\grouped_slope.tif"
-aquifer_raster_fp = r"D:\My Documents\LoFlowMaas\GIS\Data\Saved\NBS\Grouped_layers\grouped_aquifer.tif"
-soil_raster_fp = r"D:\My Documents\LoFlowMaas\GIS\Data\Saved\NBS\Grouped_layers\grouped_soil_texture2.tif"
-landuse_raster_fp = r"D:\My Documents\LoFlowMaas\GIS\Data\Saved\NBS\Grouped_layers\grouped_land_cover2.tif"
-natura2000_raster_fp = r"D:\My Documents\LoFlowMaas\GIS\Data\Saved\NBS\Grouped_layers\natura2000.tif"
-hand_raster_fp = r"D:\My Documents\LoFlowMaas\GIS\Data\Saved\NBS\Grouped_layers\grouped_hand.tif"
+slope_raster_fp = r"C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved\NBS\Grouped_layers\grouped_slope.tif"
+aquifer_raster_fp = r"C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved\NBS\Grouped_layers\grouped_aquifer.tif"
+soil_raster_fp = r"C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved\NBS\Grouped_layers\grouped_soil_texture2.tif"
+landuse_raster_fp = r"C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved\NBS\Grouped_layers\grouped_land_cover2.tif"
+natura2000_raster_fp = r"C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved\NBS\Grouped_layers\natura2000.tif"
+hand_raster_fp = r"C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved\NBS\Grouped_layers\grouped_hand.tif"
 
-output_raster_directory = r"D:\My Documents\LoFlowMaas\GIS\Data\Saved\NBS"
+output_raster_directory = r"C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved\NBS"
 
 # Step 1: Load and resample raster data
 def load_raster(raster_fp, reference_shape=None, reference_transform=None):

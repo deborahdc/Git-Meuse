@@ -99,8 +99,8 @@ def trend_analysis_all_files(directory_path, output_dir, summary_file, start_yea
     summary_df.to_excel(summary_file, index=False)
 
 # Example usage
-directory_path = r'D:\My Documents\LoFlowMaas\Discharge\interpolated' 
-output_dir = r'D:\My Documents\LoFlowMaas\Discharge\trend'
+directory_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated' 
+output_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\trend'
 summary_file = os.path.join(output_dir, 'trend_summary.xlsx')
 
 # Perform trend analysis for all files

@@ -135,7 +135,7 @@ def process_dry_spell_data(directory_path, gauge_id, start_date, end_date):
     plot_dry_spell_analysis_with_recession(data, start_date, end_date, mean_flow, threshold, dry_spell_periods, gauge_id)
 
 # Directory and parameters
-directory_path = r'D:\My Documents\LoFlowMaas\Discharge\All'
+directory_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\All'
 gauge_id = '2829100000100'  # Replace with your gauge ID
 start_date = '2015-04-01'
 end_date = '2015-10-31'

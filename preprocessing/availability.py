@@ -8,7 +8,7 @@ import numpy as np
 
 # This codes generate the availability for all stations, but monthly inspection for each station
 # To generate all together, copy the data data was saved separetely for each station folder in a folder with all stations
-input_dir = r'D:\My Documents\LoFlowMaas\Discharge\interpolated'
+input_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated'
 
 # List all average discharge files
 files = [f for f in os.listdir(input_dir) if f.endswith('.txt')]
@@ -79,7 +79,7 @@ import seaborn as sns
 import numpy as np
 
 # To generate all together, copy the data data was saved separetely for each station folder in a folder with all stations
-input_dir = r'D:\My Documents\LoFlowMaas\Discharge\interpolated'
+input_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated'
 
 # List all average discharge files
 files = [f for f in os.listdir(input_dir) if f.endswith('.txt')]
@@ -169,10 +169,10 @@ import os
 import seaborn as sns
 import numpy as np
 
-input_dir = r'D:\My Documents\LoFlowMaas\Discharge\interpolated'
+input_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated'
 
 # Path to the Excel file
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams3.xlsx' # Replace if updated
+excel_file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams3.xlsx' # Replace if updated
 
 # Load the gauge IDs from the spreadsheet
 gauge_info = pd.read_excel(excel_file_path, dtype=str)

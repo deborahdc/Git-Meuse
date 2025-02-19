@@ -128,8 +128,8 @@ def generate_spi_for_gauge(gauge_id, excel_file_path, meteorology_directory, sta
 
 # Example usage
 gauge_id = 'B720000002'
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx'
-meteorology_directory = r'D:\My Documents\LoFlowMaas\EStreams_data\EStreams\meteorology'
+excel_file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams.xlsx'
+meteorology_directory = r'C:\Users\ddo001\Documents\LoFloMeuse\EStreams_data\EStreams\meteorology'
 
 start_date = '1980-01-01'
 end_date = '2020-12-31'

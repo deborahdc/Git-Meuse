@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 import os
 
 # Input and output directories
-file_path = r'D:\My Documents\LoFlowMaas\Discharge\NL\20241011_035\20241011_035.csv' # One by one in this code
+file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\NL\20241011_035\20241011_035.csv' # One by one in this code
 
-output_dir = r'D:\My Documents\LoFlowMaas\Discharge\NL\station_outputs'
+output_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\NL\station_outputs'
 input_dir = output_dir  # Keep output files for next steps
 
 #%% Section 1: Process and save raw data
@@ -45,7 +45,7 @@ for meetpunt in meetpunt_identificaties:
 
 #%% Section 1.2 Inspecting Plot
 
-file_path = r'D:\My Documents\LoFlowMaas\Discharge\NL\station_outputs\Eijsden grens_hourly_discharge_raw.txt' # Change to check other stations
+file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\NL\station_outputs\Eijsden grens_hourly_discharge_raw.txt' # Change to check other stations
 data = pd.read_csv(file_path, sep=' ', header=0)  # Assuming space-separated file with 'Date' and 'Discharge' columns
 
 # Convert the 'Date' column back to datetime for plotting

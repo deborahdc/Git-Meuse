@@ -6,10 +6,10 @@ import pandas as pd
 import os
 
 # File paths
-info_estreams_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx'
-soils_file = r'D:\My Documents\LoFlowMaas\EStreams_data\EStreams\attributes\static_attributes\estreams_soil_attributes.csv'
-geology_file = r'D:\My Documents\LoFlowMaas\EStreams_data\EStreams\attributes\static_attributes\estreams_geology_attributes.csv'
-output_file = r'D:\My Documents\LoFlowMaas\Discharge\all_basins_attributes.txt'
+info_estreams_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams.xlsx'
+soils_file = r'C:\Users\ddo001\Documents\LoFloMeuse\EStreams_data\EStreams\attributes\static_attributes\estreams_soil_attributes.csv'
+geology_file = r'C:\Users\ddo001\Documents\LoFloMeuse\EStreams_data\EStreams\attributes\static_attributes\estreams_geology_attributes.csv'
+output_file = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\all_basins_attributes.txt'
 
 # Load gauge data to get the list of basin_ids
 gauge_data = pd.read_excel(info_estreams_path)

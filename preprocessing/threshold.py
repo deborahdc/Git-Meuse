@@ -110,9 +110,9 @@ def process_all_thresholds(directory_path, excel_file_path, output_directory, re
         print(f"Thresholds saved for gauge ID {gauge_id} to {output_file_path}")
 
 # Define paths
-directory_path = r'D:\My Documents\LoFlowMaas\Discharge\interpolated\moving_average' # If using already the moving averages, no need to add again, only if it is not smoothed enough
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams3.xlsx'
-output_directory = r'D:\My Documents\LoFlowMaas\Discharge\threshold\statistical_threshold'
+directory_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated\moving_average' # If using already the moving averages, no need to add again, only if it is not smoothed enough
+excel_file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams3.xlsx'
+output_directory = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\threshold\statistical_threshold'
 
 # Ensure the output directory exists
 os.makedirs(output_directory, exist_ok=True)
@@ -274,9 +274,9 @@ def process_gauges(excel_file_path, meteorology_dir, output_dir, reference_perio
             print(f"Error processing basin {basin_id}: {e}")
 
 # Example usage
-excel_file_path = r"D:\My Documents\LoFlowMaas\Discharge\Info_EStreams3.xlsx"
-meteorology_dir = r"D:\My Documents\LoFlowMaas\EStreams_data\EStreams\meteorology"
-output_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\p_factor"
+excel_file_path = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams3.xlsx"
+meteorology_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\EStreams_data\EStreams\meteorology"
+output_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\threshold\p_factor"
 process_gauges(excel_file_path, meteorology_dir, output_dir, reference_period=(1980, 2020))
 
 #%% Multiplies the thresholds by the p-factor
@@ -327,9 +327,9 @@ def process_thresholds_and_p_factors(thresholds_dir, p_factors_dir, output_dir):
             print(f"Missing p_factor file for {gauge_id}, skipping.")
             
 
-thresholds_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\statistical_threshold"
-p_factors_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\p_factor"
-output_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\threshold_p"
+thresholds_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\threshold\statistical_threshold"
+p_factors_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\threshold\p_factor"
+output_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\threshold\threshold_p"
 
 process_thresholds_and_p_factors(thresholds_dir, p_factors_dir, output_dir)
 #%%

@@ -2,8 +2,8 @@
 import os
 
 # Directories for input and output files
-input_dir = r"D:\My Documents\LoFlowMaas\Discharge\All"
-output_dir = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\new"
+input_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\All"
+output_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\new"
 
 # Ensure the output directory exists
 os.makedirs(output_dir, exist_ok=True)
@@ -38,8 +38,8 @@ import numpy as np
 from scipy.stats import linregress
 
 # Paths
-input_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\output"
-output_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\recession"
+input_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\output"
+output_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\recession"
 summary_file = os.path.join(output_folder, "summary.txt")
 
 # Ensure the output folder exists
@@ -200,8 +200,8 @@ import os
 import pandas as pd
 
 # Paths
-input_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\output"
-output_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\baseflow_volumes"
+input_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\output"
+output_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\baseflow_volumes"
 summary_file = os.path.join(output_folder, "summary.txt")
 
 # Ensure the output folder exists
@@ -338,8 +338,8 @@ import os
 import pandas as pd
 
 # Paths
-input_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\output"
-output_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\baseflow_volumes"
+input_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\output"
+output_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\baseflow_volumes"
 summary_file = os.path.join(output_folder, "summary2.txt")
 seasonal_bfi_file = os.path.join(output_folder, "seasonal_bfi_summary2.txt")
 
@@ -440,8 +440,8 @@ import matplotlib.pyplot as plt
 from matplotlib import rcParams
 
 # Paths
-input_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\output"
-graphs_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\graphs"
+input_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\output"
+graphs_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\graphs"
 os.makedirs(graphs_folder, exist_ok=True)
 
 # Selected stations and their Gauge IDs
@@ -623,8 +623,8 @@ import matplotlib.pyplot as plt
 from matplotlib import rcParams
 
 # Paths
-input_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\output"
-graphs_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\graphs\Log"
+input_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\output"
+graphs_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\graphs\Log"
 os.makedirs(graphs_folder, exist_ok=True)
 
 # Selected stations and their Gauge IDs
@@ -827,8 +827,8 @@ import matplotlib.pyplot as plt
 from matplotlib import rcParams
 
 # Paths
-txt_file_path = r"D:\My Documents\LoFlowMaas\Discharge\group.txt"
-output_group_folder = r"D:\My Documents\LoFlowMaas\Discharge\BFI3\graphs\group\new"
+txt_file_path = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\group.txt"
+output_group_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BFI3\graphs\group\new"
 os.makedirs(output_group_folder, exist_ok=True)
 
 # Read the data from the text file

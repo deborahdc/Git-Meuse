@@ -221,7 +221,7 @@ def generate_low_flow_analysis_plot_with_paired(
     plt.tight_layout()
 
     # Save the plot as a PNG file
-    output_directory = r"D:\My Documents\LoFlowMaas\Codes_outputs\human"
+    output_directory = r"C:\Users\ddo001\Documents\LoFloMeuse\Codes_outputs\human"
     output_filename = os.path.join(output_directory, f"{gauge_id}.png")
     #fig.savefig(output_filename, dpi=300, bbox_inches="tight")
 
@@ -229,10 +229,10 @@ def generate_low_flow_analysis_plot_with_paired(
 
 # Example (to zoom in and inspect)
 gauge_id = '2829100000100'
-directory_path = r'D:\My Documents\LoFlowMaas\Discharge\interpolated\moving_average'
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams3.xlsx'
-threshold_p_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\threshold_p"
-p_factor_dir = r"D:\My Documents\LoFlowMaas\Discharge\threshold\p_factor"
+directory_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated\moving_average'
+excel_file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams3.xlsx'
+threshold_p_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\threshold\threshold_p"
+p_factor_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\threshold\p_factor"
 start_date = '2002-10-01'
 end_date = '2004-09-30'
 

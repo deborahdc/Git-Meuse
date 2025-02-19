@@ -131,7 +131,7 @@ def process_file(gauge_id, start_date, end_date, directory_path, alpha=0.92, bet
 
     return filtered_data
 
-directory_path = r'D:\My Documents\LoFlowMaas\Discharge\All'
+directory_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\All'
 gauge_id = '6421500'  # Replace with desired gauge_id
 start_date = '2010-01-01'
 end_date = '2010-12-31' # Just to inspect closely
@@ -342,9 +342,9 @@ def process_all_basins(directory_path, excel_file_path, output_folder, start_dat
             plt.savefig(output_plot)
             plt.close()
 
-directory_path = r'D:\My Documents\LoFlowMaas\Discharge\interpolated'
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx'
-output_folder = r'D:\My Documents\LoFlowMaas\Discharge\recession'
+directory_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated'
+excel_file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams.xlsx'
+output_folder = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\recession'
 start_date = '2010-01-01'  # Just for zooming in the plot
 end_date = '2010-12-31'
 
@@ -467,9 +467,9 @@ def process_all_seasons(directory_path, excel_file_path, output_folder, beta=2, 
     print(f"All seasons summary saved in {summary_file_path}")
 
 # Paths
-base_directory_path = r'D:\My Documents\LoFlowMaas\Discharge\interpolated'
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx'
-output_folder = r'D:\My Documents\LoFlowMaas\Discharge\recession'
+base_directory_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated'
+excel_file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams.xlsx'
+output_folder = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\recession'
 
 process_all_seasons(base_directory_path, excel_file_path, output_folder, beta=2, npass=2)
 

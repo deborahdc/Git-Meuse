@@ -118,8 +118,8 @@ def process_all_files(input_dir, output_dir, window_size=30, min_days_per_month=
 
 if __name__ == '__main__':
     # Define paths
-    input_dir = r'D:\My Documents\LoFlowMaas\Discharge\interpolated'  
-    output_dir = r'D:\My Documents\LoFlowMaas\Discharge\interpolated\moving_average' 
+    input_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated'  
+    output_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated\moving_average' 
     window_size = 30  # moving window
     min_days_per_month = 20  # Minimum number of valid days per month to filter year
 

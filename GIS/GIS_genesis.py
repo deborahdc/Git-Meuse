@@ -11,13 +11,13 @@ import base64
 import numpy as np
 
 
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx'  # Excel with lat/lon
-discharge_dir = r'D:\My Documents\LoFlowMaas\Discharge\deficit'  # Directory with deficit files
-recession_summary_path = r'D:\My Documents\LoFlowMaas\Discharge\recession\summary.txt'  # Recession constants file
-attributes_path = r'D:\My Documents\LoFlowMaas\Discharge\all_basins_attributes.txt'  # Attributes file (root_dep, soil_tawc, lit_dom)
-shapefiles_dir = r'D:\My Documents\LoFlowMaas\GIS\Data\Saved'  # Directory with shapefiles
-output_map_path = r'D:\My Documents\LoFlowMaas\Codes_outputs\LowFlowAnalysis.html'  # Output map path
-output_plot_dir = r'D:\My Documents\LoFlowMaas\Codes_outputs\plots'  # Directory to save generated plots
+excel_file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams.xlsx'  # Excel with lat/lon
+discharge_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\deficit'  # Directory with deficit files
+recession_summary_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\recession\summary.txt'  # Recession constants file
+attributes_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\all_basins_attributes.txt'  # Attributes file (root_dep, soil_tawc, lit_dom)
+shapefiles_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\GIS\Data\Saved'  # Directory with shapefiles
+output_map_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Codes_outputs\LowFlowAnalysis.html'  # Output map path
+output_plot_dir = r'C:\Users\ddo001\Documents\LoFloMeuse\Codes_outputs\plots'  # Directory to save generated plots
 os.makedirs(output_plot_dir, exist_ok=True) 
 
 # Shapefiles to include on the map

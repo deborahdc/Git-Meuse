@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Set the path for the folder containing CSV files and the output folder for txt files
-input_folder = r"D:\My Documents\LoFlowMaas\Discharge\BE-F"
+input_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\BE-F"
 output_folder = os.path.join(input_folder, 'station_outputs')
 
 # Create output directory if it doesn't exist

@@ -4,8 +4,8 @@ import pandas as pd
 import os
 
 # Define paths
-input_folder = r"D:\My Documents\LoFlowMaas\Discharge\All"
-output_folder = r"D:\My Documents\LoFlowMaas\Discharge\interpolated"
+input_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\All"
+output_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated"
 
 # Create output folder if it doesn't exist
 os.makedirs(output_folder, exist_ok=True)

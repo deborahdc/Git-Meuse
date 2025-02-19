@@ -5,10 +5,10 @@ import numpy as np
 import os
 
 
-discharge_dir = r"D:\My Documents\LoFlowMaas\Discharge\interpolated\moving_average"
-excel_file_path = r"D:\My Documents\LoFlowMaas\Discharge\Info_EStreams3.xlsx"
-thresholds_folder = r"D:\My Documents\LoFlowMaas\Discharge\threshold\threshold_p"
-deficit_seasonal_output_dir = r"D:\My Documents\LoFlowMaas\Discharge\deficit_seasonal"
+discharge_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\interpolated\moving_average"
+excel_file_path = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams3.xlsx"
+thresholds_folder = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\threshold\threshold_p"
+deficit_seasonal_output_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\deficit_seasonal"
 
 os.makedirs(deficit_seasonal_output_dir, exist_ok=True)
 
@@ -192,7 +192,7 @@ import pandas as pd
 import os
 
 # Paths
-deficit_seasonal_output_dir = r"D:\My Documents\LoFlowMaas\Discharge\deficit_seasonal"
+deficit_seasonal_output_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\deficit_seasonal"
 summary_output_file = os.path.join(deficit_seasonal_output_dir, "seasonal_summary.txt")
 
 # Helper function to compute the averages per season per basin
@@ -291,7 +291,7 @@ import pandas as pd
 import os
 
 # Paths
-deficit_seasonal_output_dir = r"D:\My Documents\LoFlowMaas\Discharge\deficit_seasonal"
+deficit_seasonal_output_dir = r"C:\Users\ddo001\Documents\LoFloMeuse\Discharge\deficit_seasonal"
 summary_output_file = os.path.join(deficit_seasonal_output_dir, "seasonal_summary_aggravation_alleviation_selected.txt")
 
 # Selected basins in the specified order

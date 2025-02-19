@@ -139,8 +139,8 @@ def generate_ssi_plot(gauge_id, discharge_data, start_date, end_date, ssi_scale,
 
 # Example usage
 gauge_id = 'B720000002'
-directory_path = r'D:\My Documents\LoFlowMaas\Discharge\All'
-excel_file_path = r'D:\My Documents\LoFlowMaas\Discharge\Info_EStreams.xlsx'
+directory_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\All'
+excel_file_path = r'C:\Users\ddo001\Documents\LoFloMeuse\Discharge\Info_EStreams.xlsx'
 start_date = '1980-01-01'
 end_date = '2020-12-31'
 ssi_scale = 12

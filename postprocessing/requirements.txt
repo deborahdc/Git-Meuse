@@ -3,3 +3,5 @@ xarray
 pandas
 plotly
 numpy
+matplotlib
+netCDF4

@@ -1,0 +1,17 @@
+name: hydromt-wflow
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pip=25.0.1
+  - python=3.11
+  - hydromt=0.10.0=pyhd8ed1ab_0
+  - hydromt_wflow=0.7.0=pyhd8ed1ab_0
+  - numpy=1.26.4=py311h0b4df5a_0
+  - xarray=2024.3.0=pyhd8ed1ab_0
+  - rioxarray=0.17.0=pyhd8ed1ab_0
+  - seaborn=0.13.2=hd8ed1ab_3
+  - pip:
+    - gwwapi==0.0.2
+    - hydroengine==0.0.30
+    - tqdm

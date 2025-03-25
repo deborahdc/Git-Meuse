@@ -5,5 +5,4 @@ plotly
 numpy
 matplotlib
 netCDF4
-os
 requests

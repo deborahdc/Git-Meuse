@@ -1,14 +1,37 @@
 #%% 
+
 import xarray as xr
 import pandas as pd
 import numpy as np
 import plotly.graph_objs as go
 import dash
 from dash import dcc, html, Input, Output
+import os
+import requests
 
-# === 📂 File paths ===
-file_combined = r"C:\Users\ddo001\Documents\LoFloMeuse\Model_results\all_20250317_combined.nc"
-file_discharge = r"C:\Users\ddo001\Documents\LoFloMeuse\Model_results\other\discharge_hourlyobs_smoothed.nc"
+# === 📂 SURFdrive File URLs ===
+url_combined = "https://surfdrive.surf.nl/files/remote.php/webdav/LoFloMeuse_Deltares/Handover_190325/all_20250317_combined.nc"
+url_discharge = "https://surfdrive.surf.nl/files/remote.php/webdav/LoFloMeuse_Deltares/Handover_190325/discharge_hourlyobs_smoothed.nc"
+
+file_combined = "/tmp/all_20250317_combined.nc"
+file_discharge = "/tmp/discharge_hourlyobs_smoothed.nc"
+
+# === 🔐 Download with WebDAV credentials from environment ===
+user = os.getenv("SURF_USER")
+password = os.getenv("SURF_PASS")
+
+
+def download_file(url, dest_path):
+    if not os.path.exists(dest_path):  # Only download if not already present
+        response = requests.get(url, auth=(user, password))
+        if response.status_code == 200:
+            with open(dest_path, 'wb') as f:
+                f.write(response.content)
+        else:
+            raise Exception(f"Failed to download {url}: {response.status_code} - {response.text}")
+
+download_file(url_combined, file_combined)
+download_file(url_discharge, file_discharge)
 
 # === 📦 Load data ===
 ds_combined = xr.open_dataset(file_combined)
@@ -16,46 +39,45 @@ ds_discharge = xr.open_dataset(file_discharge)
 time_combined = pd.to_datetime(ds_combined.time.values)
 time_discharge = pd.to_datetime(ds_discharge.time.values)
 
-# === Dropdown options ===
 all_indices = list(ds_combined.index.values.astype(str))
 all_runs = list(ds_combined.runs.values.astype(str))
 all_vars = list(ds_combined.data_vars.keys())
 month_options = [t.strftime('%Y-%m') for t in pd.date_range(time_combined[0], time_combined[-1], freq='MS')]
 
 # === 🌐 Dash App ===
-app = dash.Dash(__name__)
-server = app.server  # for deployment (optional)
+app = dash.Dash(__name__, title="Hydro-Meteo Dashboard")
+server = app.server
 
 app.layout = html.Div([
-    html.H2("Hydro-Meteo Interactive Dashboard"),
+    html.H1("Hydro-Meteo Interactive Dashboard", style={"textAlign": "center", "marginBottom": 30}),
 
     html.Div([
         html.Div([
-            html.Label("Index:"),
+            html.Label("Select Index (wflow_id):"),
             dcc.Dropdown(all_indices, all_indices[0], id="index-dropdown")
-        ], style={"width": "20%", "display": "inline-block"}),
+        ], className="three columns"),
 
         html.Div([
-            html.Label("Runs:"),
+            html.Label("Select Runs:"),
             dcc.Dropdown(all_runs, ["ref"], multi=True, id="runs-select")
-        ], style={"width": "30%", "display": "inline-block"}),
+        ], className="four columns"),
 
         html.Div([
-            html.Label("Variables:"),
+            html.Label("Select Variables:"),
             dcc.Dropdown(all_vars, ["Q"], multi=True, id="vars-select")
-        ], style={"width": "30%", "display": "inline-block"}),
-    ]),
+        ], className="five columns")
+    ], className="row", style={"padding": "0 20px"}),
 
     html.Div([
-        html.Label("Time Range:"),
+        html.Label("Select Time Range:"),
         dcc.RangeSlider(
             min=0, max=len(month_options) - 1,
             value=[0, len(month_options) - 1],
             marks={i: month for i, month in enumerate(month_options) if i % 12 == 0},
-            tooltip={"placement": "bottom", "always_visible": False},
+            tooltip={"placement": "bottom"},
             id="time-slider"
         )
-    ], style={"margin": "20px"}),
+    ], style={"margin": "40px 20px"}),
 
     html.Div([
         dcc.Checklist(
@@ -67,14 +89,17 @@ app.layout = html.Div([
             id="q-checklist",
             inline=True
         ),
-        html.Button("Generate Time Series", id="btn-timeseries", n_clicks=0),
-        html.Button("Generate Heatmap", id="btn-heatmap", n_clicks=0)
-    ], style={"margin": "10px"}),
+        html.Button("Generate Time Series", id="btn-timeseries", n_clicks=0, style={"marginLeft": "20px"}),
+        html.Button("Generate Heatmap", id="btn-heatmap", n_clicks=0, style={"marginLeft": "10px"})
+    ], style={"padding": "0 20px", "marginBottom": 20}),
 
-    dcc.Graph(id="main-plot")
+    dcc.Loading(
+        dcc.Graph(id="main-plot"),
+        type="default",
+        style={"padding": "0 20px"}
+    )
 ])
 
-# === 📊 Callback Logic ===
 @app.callback(
     Output("main-plot", "figure"),
     Input("index-dropdown", "value"),
@@ -83,7 +108,7 @@ app.layout = html.Div([
     Input("time-slider", "value"),
     Input("q-checklist", "value"),
     Input("btn-timeseries", "n_clicks"),
-    Input("btn-heatmap", "n_clicks"),
+    Input("btn-heatmap", "n_clicks")
 )
 def update_plot(index, runs, variables, time_range, q_opts, n_timeseries, n_heatmap):
     ctx = dash.callback_context
@@ -91,13 +116,11 @@ def update_plot(index, runs, variables, time_range, q_opts, n_timeseries, n_heat
     t_end = pd.to_datetime(month_options[time_range[1]] + "-01") + pd.offsets.MonthEnd(1)
     i_station = int((ds_combined.index == index).argmax().item())
 
-    # Determine which button was pressed
     if ctx.triggered and ctx.triggered[0]['prop_id'].startswith("btn-heatmap"):
-        return generate_heatmap(index, runs, variables, i_station, t_start, t_end)
+        return generate_heatmap(runs, variables, i_station, t_start, t_end)
     else:
         return generate_timeseries(index, runs, variables, i_station, t_start, t_end, q_opts)
 
-# === 📈 Time Series Plot ===
 def generate_timeseries(index, runs, variables, i_station, t0, t1, q_opts):
     fig = go.Figure()
     color_map = {
@@ -127,11 +150,16 @@ def generate_timeseries(index, runs, variables, i_station, t0, t1, q_opts):
                 name=f"{var} ({run})", line=dict(color=color_map.get(var, None), dash="dot" if var != "Pr" else "solid")
             ))
 
-    fig.update_layout(title=f"Time Series | wflow_id={index}", xaxis_title="Date", yaxis_title="Value", hovermode="x unified")
+    fig.update_layout(
+        title=f"Time Series | wflow_id={index}",
+        xaxis_title="Date",
+        yaxis_title="Value",
+        hovermode="x unified",
+        margin=dict(l=40, r=20, t=40, b=40)
+    )
     return fig
 
-# === 🔥 Heatmap Plot ===
-def generate_heatmap(index, runs, variables, i_station, t0, t1):
+def generate_heatmap(runs, variables, i_station, t0, t1):
     means = {}
     for run in runs:
         i_run = int((ds_combined.runs == run).argmax().item())
@@ -157,11 +185,15 @@ def generate_heatmap(index, runs, variables, i_station, t0, t1):
         colorbar=dict(title="% Change from ref"),
         hovertemplate="Run: %{y}<br>Var: %{x}<br>Change: %{z:.2f}%<extra></extra>"
     ))
-    fig.update_layout(title=f"% Change from ref | wflow_id={index}", xaxis_title="Variable", yaxis_title="Run")
+
+    fig.update_layout(
+        title=f"% Change from ref | wflow_id={all_indices[i_station]}",
+        xaxis_title="Variable",
+        yaxis_title="Run",
+        margin=dict(l=40, r=20, t=40, b=40)
+    )
     return fig
 
-# === 🏁 Run Server ===
 if __name__ == "__main__":
     app.run_server(debug=True)
-
 #%%
